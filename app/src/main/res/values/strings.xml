@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LabCamera</string>
+    <string name="capture_the_clock">Capture the clock</string>
 </resources>
