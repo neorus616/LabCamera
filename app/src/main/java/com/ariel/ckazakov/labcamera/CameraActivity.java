@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,14 +23,19 @@ public class CameraActivity extends AppCompatActivity {
 
     ImageView photo;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        TextView textView = findViewById(R.id.textView);
+        String name = Objects.requireNonNull(super.getIntent().getExtras()).getString("name");
+        textView.setText(String.format("Hello  %s", name));
+
         Button buttonCapture = findViewById(R.id.buttonCapture);
         photo = findViewById(R.id.photo);
-        TextView textView = findViewById(R.id.textView);
+
 
         buttonCapture.setOnClickListener(new View.OnClickListener() {
             @Override
