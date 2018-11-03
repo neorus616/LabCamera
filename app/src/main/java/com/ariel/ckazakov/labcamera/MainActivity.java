@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button button = findViewById(R.id.button2);
-        final EditText editText = findViewById(R.id.editText);
+        editText = findViewById(R.id.editText);
         button.setOnClickListener(v -> {
             if (checkPermission()) {
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
@@ -53,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                    intent.putExtra("name", editText.getText().toString());
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
