@@ -2,4 +2,5 @@
     <string name="app_name">LabCamera</string>
     <string name="capture_the_clock">Capture the clock</string>
     <string name="the_photo_of_the_clock">The Photo of the clock</string>
+    <string name="permissionscantuse">You need to allow access permissions, otherwise you can\'t use this app</string>
 </resources>
