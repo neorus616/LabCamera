@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     EditText editText;
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button button = findViewById(R.id.button2);
         editText = findViewById(R.id.editText);
         button.setOnClickListener(v -> {
@@ -32,20 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
                 intent.putExtra("name", editText.getText().toString());
                 startActivity(intent);
-            } else {
-                requestPermission();
-            }
+            } else requestPermission();
         });
-    }
-
-    private boolean checkPermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.CAMERA},
-                PERMISSION_REQUEST_CODE);
     }
 
     @Override
@@ -78,5 +64,15 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", null)
                 .create()
                 .show();
+    }
+
+    private boolean checkPermission() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                PERMISSION_REQUEST_CODE);
     }
 }
