@@ -32,6 +32,8 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode != CameraActivity.RESULT_OK && data != null)
+            return;
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap) (data != null ? requireNonNull(data.getExtras()).get("data") : null);
         photo.setImageBitmap(bitmap);
